@@ -3,7 +3,7 @@
 
   # Nixpkgs / NixOS version to use.
   inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
-
+  inputs.flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
   # Upstream source tree(s).
   inputs.pcb-rnd-src = { 
     type = "tarball";
@@ -16,7 +16,7 @@
     flake = false;
   };
 
-  outputs = { self, nixpkgs, pcb-rnd-src, librnd-src }:
+  outputs = { self, nixpkgs, flake-compat, pcb-rnd-src, librnd-src }:
     let
 
       version = "3.1.3";
@@ -30,6 +30,8 @@
       # Nixpkgs instantiated for supported system types.
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; overlays = [ self.overlay ]; });
 
+      # pkgs = nixpkgs.legacyPackages.${system};
+
     in
 
     {
@@ -41,10 +43,14 @@
           pname = "pcb-rnd";
 
           inherit version;
+          # inherit nixpkgs;
 
           src = pcb-rnd-src;
 
-          buildInputs = [ final.librnd ];
+          buildInputs = with nixpkgs; [
+            final.librnd
+            gtk4
+          ];
 
           LIBRND_PREFIX = final.librnd;
 
