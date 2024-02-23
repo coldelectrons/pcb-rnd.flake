@@ -5,13 +5,21 @@
   inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
 
   # Upstream source tree(s).
-  inputs.pcb-rnd-src = { type = "tarball"; url = "http://repo.hu/projects/pcb-rnd/releases/pcb-rnd-3.0.0.tar.bz2"; flake = false; };
-  inputs.librnd-src = { type = "tarball"; url = "http://repo.hu/projects/librnd/releases/librnd-3.0.0.tar.bz2"; flake = false; };
+  inputs.pcb-rnd-src = { 
+    type = "tarball";
+    url = "http://repo.hu/projects/pcb-rnd/releases/pcb-rnd-3.1.3.tar.bz2";
+    flake = false;
+  };
+  inputs.librnd-src = { 
+    type = "tarball"; 
+    url = "http://repo.hu/projects/librnd/releases/librnd-4.1.1.tar.bz2"; 
+    flake = false;
+  };
 
   outputs = { self, nixpkgs, pcb-rnd-src, librnd-src }:
     let
 
-      version = "3.0.0";
+      version = "3.1.3";
 
       # System types to support.
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" ];
