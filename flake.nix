@@ -43,13 +43,11 @@
           pname = "pcb-rnd";
 
           inherit version;
-          # inherit nixpkgs;
 
           src = pcb-rnd-src;
 
           buildInputs = with nixpkgs; [
             final.librnd
-            gtk4
           ];
 
           LIBRND_PREFIX = final.librnd;
@@ -66,6 +64,15 @@
           inherit version;
 
           src = librnd-src;
+
+          buildInputs = with nixpkgs; [
+            imagemagick
+            gtk4
+            libepoxy
+            glib
+            gtk2
+            gnome2.gtkglext
+          ];
 
           meta = {
             homepage = "http://repo.hu/projects/librnd/";
