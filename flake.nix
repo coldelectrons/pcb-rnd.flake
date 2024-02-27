@@ -73,6 +73,15 @@
             gtk2
             gnome2.gtkglext
           ];
+          nativeBuildInputs = with nixpkgs; [
+            imagemagick
+            gtk4
+            libepoxy
+            glib
+            gtk2
+            gnome2.gtkglext
+            pkg-config
+          ];
 
           meta = {
             homepage = "http://repo.hu/projects/librnd/";
